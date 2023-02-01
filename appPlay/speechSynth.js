@@ -18,7 +18,7 @@ const goodEnVoiceUris = new Set([
     'Karen',
     'Moira',
     // 'Rishi', // en-IN.
-    'Tessa',
+    'Tessa', // en-ZA
 ]);
 
 

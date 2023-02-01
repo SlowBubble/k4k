@@ -22,7 +22,7 @@ What did you eat for lunch?	I ate $PAUSE some $Word	t	tomatoes
 What did you eat for lunch?	I ate $PAUSE some $Word	u	udon	bowls of
 What did you eat for lunch?	I ate $PAUSE some $Word	v	veggies	pieces of
 What did you eat for brunch?	I ate $PAUSE some $Word	w	watermelons	
-What did you eat for snacks?	I ate $PAUSE some $Word	x	xmas cookies	pieces of
+What did you eat for snacks?	I ate $PAUSE some $Word	x	christmas cookies	pieces of
 What did you eat for breakfast?	I ate $PAUSE some $Word	y	yogurt	bowls of
 What did you eat for dinner?	I ate $PAUSE some $Word	z	zucchinis	
 How many $PrevQuantifier $PrevWord did you eat?	I ate $Word $PrevQuantifier $PrevWord	0	0	

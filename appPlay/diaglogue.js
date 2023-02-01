@@ -24,7 +24,7 @@ function instantiateTemplate(templateString, templateKeyVal, prevLetterTemplateK
                 varNameToVal.set(varName, prevLetterTemplateKeyVal.get(lookupKey));
                 return;
             }
-            console.warn('Failed to look up the previous key: ', varNameWithDollarSign, ' template:', prevLetterTemplate);
+            console.warn('Failed to look up the previous key: ', varNameWithDollarSign, ' template:', prevLetterTemplateKeyVal);
             return;
         }
         const lookupKey = varName.slice(1);
