@@ -5,7 +5,7 @@ html, body, #displayer-svg {
 }
 
 #displayer-svg * {
-  animation: fadeIn 6s;
+  animation: fadeIn 4s;
 }
 
 @keyframes fadeIn {

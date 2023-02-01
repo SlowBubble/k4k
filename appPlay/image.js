@@ -1,6 +1,5 @@
 
-const dirPath = 'appPlay/assets';
-export function templateToSvgElts(numberOrNull, currTemplate, prevLetterTemplate) {
+export function templateToSvgElts(dirPath, numberOrNull, currTemplate, prevLetterTemplate) {
     let fileName;
     const numImages = numberOrNull === null ? 1 : numberOrNull;
     if (numImages === 0) {

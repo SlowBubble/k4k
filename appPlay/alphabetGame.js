@@ -4,6 +4,16 @@ import { Sentence } from "./sentence.js";
 import { speakSentence } from "./speechSynth.js";
 import { templateToSvgElts } from "./image.js";
 
+
+const levelToAssetsDirPath = {
+    1: 'appPlay/level1Assets',
+    2: 'appPlay/level2Assets',
+}
+const levelToTemplateFileName = {
+    1: 'ABC-tasty-food - 1.tsv',
+    2: 'ABC-where-did-you-go - 1.tsv',
+}
+
 export class AlphabetGame {
     constructor({level = 0, displayerSvg = null, synth = null, maxNumRounds = 0, playerName = ''}) {
         this.level = level;
@@ -15,11 +25,13 @@ export class AlphabetGame {
         this.keyToTemplate = new Map();
         this.prevLetterTemplate = null;
         this.playerName = playerName;
+        this.assetsDirPath = '';
     }
 
     getGreeting() {
         const prefixes = ['Hey', '', ''];
-        const names = [`, ${this.playerName}`, 'buddy', 'my friend', '', '', '', ''];
+        const pauseName = this.playerName ? `, ${this.playerName}` : '';
+        const names = [pauseName, pauseName, 'buddy', 'my friend', '', '', ''];
         const prefix = prefixes[getRandomInt(prefixes.length)];
         const name = names[getRandomInt(names.length)];
         if (!name && !prefix) {
@@ -30,9 +42,9 @@ export class AlphabetGame {
 
     respond(key) {
         if (this.numRounds >= this.maxNumRounds) {
-            speakSentence(new Sentence({content: this.getGreeting(), speechRate: 0.7}));
-            speakSentence(new Sentence({content: 'Game time is over.', speechRate: 0.8}));
-            speakSentence(new Sentence({content: 'Go take a break.', speechRate: 0.7}));
+            speakSentence(new Sentence({content: this.getGreeting(), speechRate: 0.75}));
+            speakSentence(new Sentence({content: 'Game time is over.', speechRate: 0.85}));
+            speakSentence(new Sentence({content: 'Go take a break.', speechRate: 0.75}));
             return;
         }
 
@@ -44,7 +56,7 @@ export class AlphabetGame {
             if (this.numWrongKeys > 1) {
                 content = 'You are not pressing on a letter or a number.'
             }
-            speakSentence(new Sentence({content: this.getGreeting(), speechRate: 0.7}));
+            speakSentence(new Sentence({content: this.getGreeting(), speechRate: 0.8}));
             speakSentence(new Sentence({content: content, speechRate: 0.9}));
             return;
         }
@@ -57,7 +69,7 @@ export class AlphabetGame {
             if (isLetter) {
                 this.prevLetterTemplate = this.keyToTemplate.get(key);
             }
-            svgElts = templateToSvgElts(numberOrNull, currTemplate, this.prevLetterTemplate);
+            svgElts = templateToSvgElts(this.assetsDirPath, numberOrNull, currTemplate, this.prevLetterTemplate);
         } else {
             sentences = generateDefaultSentences(key, this.numRounds % 5 === 0);
         }
@@ -80,7 +92,13 @@ export class AlphabetGame {
 
     async setLevel(level) {
         this.level = level;
-        this.keyToTemplate = await getKeyToTemplate(level);
+        const assetsDirPath = levelToAssetsDirPath[level];
+        const templateFileName = levelToTemplateFileName[level];
+        if (!assetsDirPath || !templateFileName) {
+            return;
+        }
+        this.assetsDirPath = assetsDirPath;
+        this.keyToTemplate = await getKeyToTemplate(`${assetsDirPath}/${templateFileName}`);
         this.prevLetterTemplate = this.keyToTemplate.get('a');
     }
 }

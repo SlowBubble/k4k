@@ -8,7 +8,7 @@ function main() {
     const synth = window.speechSynthesis;
     const urlParams = new URLSearchParams(window.location.search);
     const level = parseInt(urlParams.get('level') || '1');
-    const maxNumRounds = parseInt(urlParams.get('rounds') || '2');
+    const maxNumRounds = parseInt(urlParams.get('rounds') || '30');
     const playerName = urlParams.get('name') || '';
     const game = new AlphabetGame({displayerSvg: displayerSvg, synth: synth, maxNumRounds: maxNumRounds, playerName: playerName});
     game.setLevel(level);

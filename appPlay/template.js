@@ -1,9 +1,10 @@
 
 export const levelToAssetUrl = {
     1: 'appPlay/assets/ABC-tasty-food - 1.tsv',
+    2: 'appPlay/level2Assets/ABC-where-did-you-go - 1.tsv',
 }
-export async function getKeyToTemplate(level) {
-    const response = await fetch(levelToAssetUrl[level]);
+export async function getKeyToTemplate(templateFilePath) {
+    const response = await fetch(templateFilePath);
     const tsv = await response.text();
     const gridData = tsv.split(/\r?\n/g).map(line => line.split('\t'));
     const keyValForRows = parseAsKeyValForRows(gridData);
