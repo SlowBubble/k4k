@@ -1,11 +1,15 @@
 import { Sentence } from "./sentence.js";
 import { getRandomEnVoices } from "./speechSynth.js";
 
-export function templateToSentences(template, prevLetterTemplate) {
+export function templateToSentences(template, prevLetterTemplate, greeting) {
     const question = instantiateTemplate(template.questionTemplate, template.templateKeyVal, prevLetterTemplate.templateKeyVal);
     const answer = instantiateTemplate(template.answerTemplate, template.templateKeyVal, prevLetterTemplate.templateKeyVal);
     const [voice1, voice2] = getRandomEnVoices(2);
-    const sentences = [new Sentence({content: question, voice: voice1, speechRate: 0.9})];
+    const sentences = [];
+    if (greeting) {
+        sentences.push(new Sentence({content: greeting, voice: voice1, speechRate: 0.8}));
+    }
+    sentences.push(new Sentence({content: question, voice: voice1, speechRate: 0.9}));
     sentences.push(new Sentence({content: answer, voice: voice2, speechRate: 0.9}));
     return sentences;
 }

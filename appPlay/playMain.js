@@ -1,5 +1,4 @@
 import { AlphabetGame } from "./alphabetGame.js";
-import { levelToAssetUrl } from "./template.js";
 
 main();
 
@@ -7,9 +6,11 @@ function main() {
     const displayerSvg = document.getElementById('displayer-svg');
     const header = document.getElementById('instruction-header');
     const synth = window.speechSynthesis;
-    const game = new AlphabetGame({displayerSvg: displayerSvg, synth: synth});
     const urlParams = new URLSearchParams(window.location.search);
-    const level = parseInt(urlParams.get('level') || 1);
+    const level = parseInt(urlParams.get('level') || '1');
+    const maxNumRounds = parseInt(urlParams.get('rounds') || '2');
+    const playerName = urlParams.get('name') || '';
+    const game = new AlphabetGame({displayerSvg: displayerSvg, synth: synth, maxNumRounds: maxNumRounds, playerName: playerName});
     game.setLevel(level);
     document.addEventListener("keydown", event => {
         if (event.metaKey) {
