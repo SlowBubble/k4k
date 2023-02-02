@@ -2,24 +2,51 @@ const synth = window.speechSynthesis;
 
 // Load this later since getVoices seems to be empty when called too early.
 let availableGoodEnVoices;
+getAvailableGoodEnVoices()
 function getAvailableGoodEnVoices() {
-    if (!availableGoodEnVoices) {
-        availableGoodEnVoices = synth.getVoices().filter(voice => goodEnVoiceUris.has(voice.voiceURI));
+    if (availableGoodEnVoices && availableGoodEnVoices.length > 0) {
+        return availableGoodEnVoices;
     }
+
+    const langToFirstVoice = new Map();
+    synth.getVoices().forEach(voice => {
+        if (langToFirstVoice.has(voice.lang)) {
+            return;
+        }
+        langToFirstVoice.set(voice.lang, voice);
+    });
+
+    const enVoiceUris = new Set();
+    langToFirstVoice.forEach((voice, lang) => {
+        if (!lang.startsWith('en-')) {
+            return;
+        }
+        if (lang === 'en-IN') {
+            return;
+        }
+        enVoiceUris.add(voice.voiceURI);
+    });
+
+    const googleEnVoices = synth.getVoices().filter(voice => {
+        return voice.voiceURI.match(/google/i) && voice.lang.startsWith('en-');
+    });
+    googleEnVoices.forEach(voice => enVoiceUris.add(voice.voiceURI));
+
+    availableGoodEnVoices = synth.getVoices().filter(voice => enVoiceUris.has(voice.voiceURI));
     return availableGoodEnVoices;
 }
 
-const goodEnVoiceUris = new Set([
-    'Samantha',
-    'Google US English',
-    'Daniel',
-    'Google UK English Female',
-    'Google UK English Male',
-    'Karen',
-    'Moira',
-    // 'Rishi', // en-IN.
-    'Tessa', // en-ZA
-]);
+// const goodEnVoiceUris = new Set([
+//     'Samantha',
+//     'Google US English',
+//     'Daniel',
+//     'Google UK English Female',
+//     'Google UK English Male',
+//     'Karen',
+//     'Moira',
+//     // 'Rishi', // en-IN.
+//     'Tessa', // en-ZA
+// ]);
 
 
 
@@ -34,7 +61,6 @@ export function speakSentence(sentence) {
 }
 
 export function getRandomEnVoices(numVoices) {
-    
     const unshuffled = getAvailableGoodEnVoices();
     // while (unshuffled.length < numVoices) { unshuffled = unshuffled.concat(getAvailableGoodEnVoices())}
     const shuffled = unshuffled
