@@ -13,7 +13,7 @@ function main() {
     const game = new AlphabetGame({displayerSvg: displayerSvg, synth: synth, maxNumRounds: maxNumRounds, playerName: playerName});
     game.setLevel(level);
     document.addEventListener("keydown", event => {
-        if (event.metaKey) {
+        if (event.metaKey || event.ctrlKey) {
             return;
         }
 

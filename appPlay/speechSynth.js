@@ -1,5 +1,14 @@
 const synth = window.speechSynthesis;
 
+const goodEnLocales = new Set([
+    'en-us',
+    'en-gb',
+    'en-au',
+    'en-za',
+    'en-nz',
+    'en-ie',
+]);
+
 // Load this later since getVoices seems to be empty when called too early.
 let availableGoodEnVoices;
 getAvailableGoodEnVoices()
@@ -18,13 +27,9 @@ function getAvailableGoodEnVoices() {
 
     const enVoiceUris = new Set();
     langToFirstVoice.forEach((voice, lang) => {
-        if (!lang.startsWith('en-')) {
-            return;
+        if (goodEnLocales.has(lang.toLowerCase())) {
+            enVoiceUris.add(voice.voiceURI);
         }
-        if (lang === 'en-IN') {
-            return;
-        }
-        enVoiceUris.add(voice.voiceURI);
     });
 
     const googleEnVoices = synth.getVoices().filter(voice => {
@@ -33,22 +38,9 @@ function getAvailableGoodEnVoices() {
     googleEnVoices.forEach(voice => enVoiceUris.add(voice.voiceURI));
 
     availableGoodEnVoices = synth.getVoices().filter(voice => enVoiceUris.has(voice.voiceURI));
+    console.log(availableGoodEnVoices);
     return availableGoodEnVoices;
 }
-
-// const goodEnVoiceUris = new Set([
-//     'Samantha',
-//     'Google US English',
-//     'Daniel',
-//     'Google UK English Female',
-//     'Google UK English Male',
-//     'Karen',
-//     'Moira',
-//     // 'Rishi', // en-IN.
-//     'Tessa', // en-ZA
-// ]);
-
-
 
 export function speakSentence(sentence) {
     const utterance = new SpeechSynthesisUtterance(sentence.content);
@@ -56,7 +48,7 @@ export function speakSentence(sentence) {
     if (sentence.voice) {
         utterance.voice = sentence.voice;
     }
-    console.log(utterance.voice)
+    console.log(utterance.voice);
     synth.speak(utterance);
 }
 
