@@ -24,7 +24,6 @@ function instantiateTemplate(templateString, templateKeyVal, prevLetterTemplateK
         }
         if (varName.startsWith('$Prev')) {
             const lookupKey = varName.slice(5);
-            console.log(lookupKey);
             if (prevLetterTemplateKeyVal.has(lookupKey)) {
                 varNameToVal.set(varName, prevLetterTemplateKeyVal.get(lookupKey));
                 return;

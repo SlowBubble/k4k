@@ -5,12 +5,12 @@ html, body, #displayer-svg {
 }
 
 #displayer-svg * {
-  animation: fadeIn 4s;
+  animation: fadeIn 3s;
 }
 
 @keyframes fadeIn {
   from {
-    opacity: 0;
+    opacity: 0.2;
   }
   to {
     opacity: 1;

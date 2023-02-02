@@ -4,7 +4,6 @@ main();
 
 function main() {
     const displayerSvg = document.getElementById('displayer-svg');
-    const header = document.getElementById('instruction-header');
     const synth = window.speechSynthesis;
     const urlParams = new URLSearchParams(window.location.search);
     const level = parseInt(urlParams.get('level') || '1');
@@ -12,7 +11,8 @@ function main() {
     const playerName = urlParams.get('name') || '';
     const game = new AlphabetGame({displayerSvg: displayerSvg, synth: synth, maxNumRounds: maxNumRounds, playerName: playerName});
     game.setLevel(level);
-    document.addEventListener("keydown", event => {
+    let isLocked = false;
+    document.addEventListener("keydown", async event => {
         if (event.metaKey || event.ctrlKey) {
             return;
         }
@@ -20,10 +20,15 @@ function main() {
         // E.g. kids press on random keys like Tab to break out of the game accidentally.
         event.preventDefault();
         
-        if (synth.speaking) {
+        if (synth.speaking || isLocked) {
             return;
         }
-        header.innerHTML = '';
-        game.respond(event.key);
+
+        isLocked = true;
+        try {
+            await game.respond(event.key);
+        } finally {
+            isLocked = false;
+        }
     });
 }
