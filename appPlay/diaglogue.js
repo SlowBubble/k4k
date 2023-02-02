@@ -15,7 +15,7 @@ export function templateToSentences(template, prevLetterTemplate, greeting) {
 }
 
 function instantiateTemplate(templateString, templateKeyVal, prevLetterTemplateKeyVal) {
-    const varNames = templateString.match(/\$[\S]+/g) || [];
+    const varNames = templateString.match(/\$[\w]+/g) || [];
     const varNameToVal = new Map();
     varNames.forEach(varName => {
         if (varName === '$PAUSE') {
@@ -24,11 +24,12 @@ function instantiateTemplate(templateString, templateKeyVal, prevLetterTemplateK
         }
         if (varName.startsWith('$Prev')) {
             const lookupKey = varName.slice(5);
+            console.log(lookupKey);
             if (prevLetterTemplateKeyVal.has(lookupKey)) {
                 varNameToVal.set(varName, prevLetterTemplateKeyVal.get(lookupKey));
                 return;
             }
-            console.warn('Failed to look up the previous key: ', varNameWithDollarSign, ' template:', prevLetterTemplateKeyVal);
+            console.warn('Failed to look up the previous key: ', varName, ' template:', prevLetterTemplateKeyVal);
             return;
         }
         const lookupKey = varName.slice(1);
