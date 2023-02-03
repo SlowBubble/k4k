@@ -1,4 +1,3 @@
-const synth = window.speechSynthesis;
 
 const goodEnLocales = new Set([
     'en-us',
@@ -18,7 +17,7 @@ function getAvailableGoodEnVoices() {
     }
 
     const langToFirstVoice = new Map();
-    synth.getVoices().forEach(voice => {
+    window.speechSynthesis.getVoices().forEach(voice => {
         if (langToFirstVoice.has(voice.lang)) {
             return;
         }
@@ -32,12 +31,12 @@ function getAvailableGoodEnVoices() {
         }
     });
 
-    const googleEnVoices = synth.getVoices().filter(voice => {
+    const googleEnVoices = window.speechSynthesis.getVoices().filter(voice => {
         return voice.voiceURI.match(/google/i) && voice.lang.startsWith('en-');
     });
     googleEnVoices.forEach(voice => enVoiceUris.add(voice.voiceURI));
 
-    availableGoodEnVoices = synth.getVoices().filter(voice => enVoiceUris.has(voice.voiceURI));
+    availableGoodEnVoices = window.speechSynthesis.getVoices().filter(voice => enVoiceUris.has(voice.voiceURI));
     console.log(availableGoodEnVoices);
     return availableGoodEnVoices;
 }
@@ -49,7 +48,7 @@ export function speakSentence(sentence) {
         utterance.voice = sentence.voice;
     }
     console.log(utterance.voice);
-    synth.speak(utterance);
+    window.speechSynthesis.speak(utterance);
 }
 
 export function getRandomEnVoices(numVoices) {
@@ -62,15 +61,15 @@ export function getRandomEnVoices(numVoices) {
     return shuffled.slice(0, numVoices);
 }
 
-// TODO experiment with these
-// en-US has a lot of wierd voices, so we exlude US here.
-const goodEnNonUsVoices = synth.getVoices().filter(voice => voice.lang.startsWith("en") && !voice.lang.includes("-US") && !voice.name.includes("("));
-// Pick the first voice from en-US, en-UK and en-AU.
-// const availabeEnVoices = [];
-const musicalVoiceUris = new Set([
-    'Bells',
-    'Cellos',
-    'Good News',
-    'Trinoids',
-    'Zarvox',
-]);
+// // TODO experiment with these
+// // en-US has a lot of wierd voices, so we exlude US here.
+// const goodEnNonUsVoices = window.speechSynthesis.getVoices().filter(voice => voice.lang.startsWith("en") && !voice.lang.includes("-US") && !voice.name.includes("("));
+// // Pick the first voice from en-US, en-UK and en-AU.
+// // const availabeEnVoices = [];
+// const musicalVoiceUris = new Set([
+//     'Bells',
+//     'Cellos',
+//     'Good News',
+//     'Trinoids',
+//     'Zarvox',
+// ]);

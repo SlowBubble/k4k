@@ -1,34 +1,39 @@
+import { makePubSub } from "../esModules/pub-sub/pubSub.js";
 import { AlphabetGame } from "./alphabetGame.js";
+import { Keyboard } from "./keyboard.js";
+import { Menu } from "./menu.js";
+import { sanitizeName } from "./sanitizeName.js";
+import { getUrlParamsMap } from "./url.js";
 
 main();
 
 function main() {
     const displayerSvg = document.getElementById('displayer-svg');
-    const synth = window.speechSynthesis;
-    const urlParams = new URLSearchParams(window.location.search);
-    const level = parseInt(urlParams.get('level') || '1');
-    const maxNumRounds = parseInt(urlParams.get('rounds') || '30');
-    const playerName = urlParams.get('name') || '';
-    const game = new AlphabetGame({displayerSvg: displayerSvg, synth: synth, maxNumRounds: maxNumRounds, playerName: playerName});
-    game.setLevel(level);
-    let isLocked = false;
-    document.addEventListener("keydown", async event => {
-        if (event.metaKey || event.ctrlKey) {
-            return;
-        }
+    const paramsMap = getUrlParamsMap();
+    const level = parseInt(paramsMap.get('level') || '1');
+    const maxNumRounds = parseInt(paramsMap.get('tries') || '20');
+    const playerName = sanitizeName(paramsMap.get('name')  || '');
+    const [numRemainingTriesPub, numRemainingTriesSub] = makePubSub();
+    numRemainingTriesSub(num => document.getElementById('remaining-tries-display').textContent = num);
 
-        // E.g. kids press on random keys like Tab to break out of the game accidentally.
-        event.preventDefault();
-        
-        if (synth.speaking || isLocked) {
-            return;
-        }
-
-        isLocked = true;
-        try {
-            await game.respond(event.key);
-        } finally {
-            isLocked = false;
-        }
+    const game = new AlphabetGame({
+        displayerSvg: displayerSvg,
+        maxNumRounds: maxNumRounds,
+        playerName: playerName,
+        numRemainingTriesPub: numRemainingTriesPub,
     });
+    game.loadLevel(level);
+    const keyboard = new Keyboard({game: game});
+    const _ = new Menu({
+        buttonHtml: document.getElementById('menu-toggle-button'),
+        menuHtml: document.getElementById('menu-panel'),
+        nameInputHtml: document.getElementById('name-input'),
+        levelDisplayHtml: document.getElementById('level-display'),
+        incrLevelHtml: document.getElementById('incr-level-btn'),
+        decrLevelHtml: document.getElementById('decr-level-btn'),
+        triesDisplayHtml: document.getElementById('remaining-tries-display'),
+        incrTriesHtml: document.getElementById('incr-tries-btn'),
+        decrTriesHtml: document.getElementById('decr-tries-btn'),
+        game: game, keyboard: keyboard,
+    })
 }

@@ -3,8 +3,52 @@
     <title>Keyboarding 4 Kids</title>
     <script type="module" src="./appPlay/playMain.js"></script>
     <link rel="stylesheet" type="text/css" href="./svg.css">
+    <link rel="stylesheet" type="text/css" href="./menu.css">
   </head>
   <body>
     <svg id="displayer-svg" height="100%" width="100%"></svg>  
+    <div id="menu-toggle-div">
+      <button id="menu-toggle-button">Menu</button>
+    </div>
+    <div id='menu-panel' style='display: none;'>
+      <table id='menu-table'>
+        <tr>
+          <td>
+            Level
+          </td>
+          <td id='level-display'>
+            9
+          </td>
+          <td>
+            <div>
+              <button id='incr-level-btn'>&#9650;</button>
+            </div>
+            <div>
+              <button id='decr-level-btn'>&#9660;</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Remaining tries
+          </td>
+          <td id='remaining-tries-display'>
+            9
+          </td>
+          <td>
+            <div>
+              <button id='incr-tries-btn'>&#9650;</button>
+            </div>
+            <div>
+              <button id='decr-tries-btn'>&#9660;</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div>
+        <label for="name-input">Name</label>
+        <input id='name-input' type="text" placeholder="Player Name" />
+      </div>
+    </div>
   
   </body></html>

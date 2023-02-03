@@ -4,6 +4,11 @@ html, body, #displayer-svg {
   margin: 0;
 }
 
+#displayer-svg {
+  /* Needed for positioning behind the menu */
+  position: fixed;
+}
+
 #displayer-svg * {
   animation: fadeIn 3s;
 }

@@ -1,8 +1,9 @@
 
 
 ## TODO
-- Nav
+
 - Level 3
+- Support multiple words for the same key
 
 ## Doing
 
@@ -10,4 +11,5 @@
 
 ## Done
 
+- Menu
 - Caption
