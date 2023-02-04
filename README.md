@@ -3,10 +3,11 @@
 ## TODO
 
 - Support multiple words for the same key
+- Chinese: use a Google Workspace web app
 
 ## Doing
 
-- foreign language: use LibreTranslate or use a Google Workspace web app.
+- French/Spanish/Jap: use LibreTranslate.
 - Level 3
 
 

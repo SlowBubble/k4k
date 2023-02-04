@@ -32,7 +32,7 @@ function getAvailableGoodEnVoices() {
     });
 
     const googleEnVoices = window.speechSynthesis.getVoices().filter(voice => {
-        return voice.voiceURI.match(/google/i) && voice.lang.startsWith('en-');
+        return voice.voiceURI.match(/google/i) && goodEnLocales.has(voice.lang.toLowerCase());
     });
     googleEnVoices.forEach(voice => enVoiceUris.add(voice.voiceURI));
 

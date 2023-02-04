@@ -59,6 +59,10 @@ export class AlphabetGame {
         this.numRemainingTriesPub(this.maxNumRounds - this.numRounds);
 
         if (this.numRounds > this.maxNumRounds) {
+            if (this.numRounds + 1 === this.maxNumRounds) {
+                renderTextInSvg(this.displayerSvg, 'Game Over'.toUpperCase(), 150);
+
+            }
             speakSentence(new Sentence({content: this.getGreeting(), speechRate: 0.75}));
             speakSentence(new Sentence({content: 'Game time is over.', speechRate: 0.85}));
             speakSentence(new Sentence({content: 'Go take a break.', speechRate: 0.75}));
@@ -99,11 +103,8 @@ export class AlphabetGame {
         } else {
             renderTextInSvg(this.displayerSvg, key.toUpperCase());
         }
-        if (this.numRounds >= this.maxNumRounds) {
-            // TODO delay based on the end of the diaglogue
-            setTimeout(_ => {
-                renderTextInSvg(this.displayerSvg, 'Game Over'.toUpperCase(), 150);
-            }, 5000);
+        if (this.numRounds == this.maxNumRounds) {
+            this.displayerSvg.style.background = 'grey';
         }
     }
 
