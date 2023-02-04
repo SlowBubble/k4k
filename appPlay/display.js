@@ -2,46 +2,51 @@ import { getBbox } from "./svgUtil.js";
 
 const svgns = "http://www.w3.org/2000/svg";
 
+const numImagesPerRow = 4;
 
-export async function templateToSvgElts(dirPath, numberOrNull, currTemplate, prevLetterTemplate) {
+export async function templateToSvgElts(dirPath, isNumber, currTemplate, prevLetterTemplate) {
     let fileName;
+    if (currTemplate.templateKeyVal.get('ImageName')) {
+        fileName = currTemplate.templateKeyVal.get('ImageName') + '.jpeg';
+    } else {
+        const template = isNumber ? prevLetterTemplate : currTemplate;
+        const word = template.templateKeyVal.get('Word');
+        if (word) {
+            fileName = word.replaceAll(' ', '-') + '.jpeg';
+        }
+    }
     
-    // const numImages = numberOrNull === null ? 1 : numberOrNull;
-    // if (numImages === 0) {
-    //     fileName = 'zero.jpeg';
-    // } else {
-        // TODO check if ImageName is available in the future.
-    const template = numberOrNull === null ? currTemplate : prevLetterTemplate;
-    const word = template.templateKeyVal.get('Word');
-    const possInt = parseInt(word);
-    const numImages = isNaN(possInt) ? 1 : possInt;
-    if (word) {
-        fileName = word.replaceAll(' ', '-') + '.jpeg';
-    }
-    // }\
-    if (!fileName) {
-        return;
-    }
-
-    const href = `${dirPath}/${fileName}`;
-
-    let currHeight = 0;
-    const svgElts = [];
-
+    const href = fileName ? `${dirPath}/${fileName}` : 'appPlay/404.jpeg';
+    
     const maxHeight = window.innerHeight - 120;
     const maxWidth = window.innerWidth;
-
+    const possInt = parseInt(currTemplate.templateKeyVal.get('Key'));
+    let numImages = isNaN(possInt) ? 1 : possInt;
+    numImages = numImages === 0 ? 10 : numImages;
+    const bbox = await getBbox(genImageElt(href));
+    const dims = getReasonableDims(bbox, maxWidth, maxHeight, numImages);
+    
+    const svgElts = [];
+    let currColIdx = 0;
+    let currRowIdx = 0;
     for (let idx = 0; idx < numImages; idx++) {
-        const bbox = await getBbox(genImageElt(href));
         const imageElt = genImageElt(href);
-        const height = getReasonableHeight(bbox, maxWidth, maxHeight);
-        imageElt.setAttributeNS(null, "height", height);
-        currHeight += height;
+        imageElt.setAttributeNS(null, "x", currColIdx * dims.width);
+        imageElt.setAttributeNS(null, "y", currRowIdx * dims.height);
+        imageElt.setAttributeNS(null, "height", dims.height);
         svgElts.push(imageElt);
+
+        if (currColIdx + 1 < numImagesPerRow) {
+            currColIdx += 1;
+        } else {
+            currColIdx = 0;
+            currRowIdx += 1;
+        }
     }
+
     const text = document.createElementNS(svgns, "text");
     text.setAttribute("x", 10);
-    text.setAttribute("y", currHeight + 10);
+    text.setAttribute("y", Math.ceil(numImages / numImagesPerRow) * dims.height + 10);
     text.setAttribute("font-size", 100);
     text.setAttribute("font-family", "Arial");
     text.setAttribute('alignment-baseline', 'hanging');
@@ -51,8 +56,22 @@ export async function templateToSvgElts(dirPath, numberOrNull, currTemplate, pre
     return svgElts;
 }
 
-function getReasonableHeight(bbox, maxWidth, maxHeight) {
-    return 400;
+function getReasonableDims(bbox, maxWidth, maxHeight, numImages) {
+    const numRows = Math.ceil(numImages / numImagesPerRow);
+    const numCols = Math.min(numImagesPerRow, numImages);
+    const maxHeightPerImage = maxHeight / numRows;
+    const maxWidthPerImage = maxWidth / numCols;
+    const imageWidthToHeightRatio = bbox.width > 0 && bbox.height > 0 ? bbox.width / bbox.height : 1;
+    let width = 400;
+    let height = 400;
+    if (imageWidthToHeightRatio > maxWidthPerImage / maxHeightPerImage) {
+        width = Math.min(maxWidthPerImage, 600);
+        height = width / imageWidthToHeightRatio;
+    } else {
+        height = Math.min(maxHeightPerImage, 600);
+        width = height * imageWidthToHeightRatio;
+    }
+    return {height: height, width: width};
 }
 
 function capitalizeFirstLetter(string) {

@@ -7,7 +7,7 @@ export class Menu {
         levelDisplayHtml, incrLevelHtml, decrLevelHtml,
         triesDisplayHtml, incrTriesHtml, decrTriesHtml,
         game, keyboard}) {
-        this.isVisible = true;
+        this.isVisible = false;
         this.menuHtml = menuHtml;
 
         nameInputHtml.onfocus = _ => {

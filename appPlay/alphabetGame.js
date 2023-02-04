@@ -77,7 +77,6 @@ export class AlphabetGame {
             speakSentence(new Sentence({content: content, speechRate: 0.9}));
             return;
         }
-        const numberOrNull = isNumber ? parseInt(key) : null;
         let sentences;
         let svgElts;
         if (this.keyToTemplate.has(key)) {
@@ -86,7 +85,7 @@ export class AlphabetGame {
             if (isLetter) {
                 this.prevLetterTemplate = this.keyToTemplate.get(key);
             }
-            svgElts = await templateToSvgElts(this.assetsDirPath, numberOrNull, currTemplate, this.prevLetterTemplate);
+            svgElts = await templateToSvgElts(this.assetsDirPath, isNumber, currTemplate, this.prevLetterTemplate);
         } else {
             sentences = generateDefaultSentences(key, this.numRounds % 5 === 1);
         }
