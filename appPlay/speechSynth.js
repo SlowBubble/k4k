@@ -47,6 +47,9 @@ export function speakSentence(sentence) {
     if (sentence.voice) {
         utterance.voice = sentence.voice;
     }
+    if (sentence.action) {
+        utterance.onstart = _ => sentence.action()
+    }
     console.log(utterance.voice);
     window.speechSynthesis.speak(utterance);
 }

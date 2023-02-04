@@ -81,11 +81,13 @@ export class AlphabetGame {
         let svgElts;
         if (this.keyToTemplate.has(key)) {
             const currTemplate = this.keyToTemplate.get(key);
-            sentences = templateToSentences(currTemplate, this.prevLetterTemplate, this.getGreeting());
+            sentences = templateToSentences(
+                currTemplate, this.prevLetterTemplate, isNumber, this.getGreeting());
             if (isLetter) {
                 this.prevLetterTemplate = this.keyToTemplate.get(key);
             }
-            svgElts = await templateToSvgElts(this.assetsDirPath, isNumber, currTemplate, this.prevLetterTemplate);
+            svgElts = await templateToSvgElts(
+                this.assetsDirPath, isNumber, currTemplate, this.prevLetterTemplate);
         } else {
             sentences = generateDefaultSentences(key, this.numRounds % 5 === 1);
         }

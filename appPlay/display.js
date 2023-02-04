@@ -31,6 +31,10 @@ export async function templateToSvgElts(dirPath, isNumber, currTemplate, prevLet
     let currRowIdx = 0;
     for (let idx = 0; idx < numImages; idx++) {
         const imageElt = genImageElt(href);
+        imageElt.setAttributeNS(null, "id", `image-${idx + 1}`);
+        if (numImages > 1) {
+            imageElt.setAttributeNS(null, "class", `opaque`);
+        }
         imageElt.setAttributeNS(null, "x", currColIdx * dims.width);
         imageElt.setAttributeNS(null, "y", currRowIdx * dims.height);
         imageElt.setAttributeNS(null, "height", dims.height);

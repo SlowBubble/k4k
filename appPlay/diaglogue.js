@@ -1,7 +1,7 @@
 import { Sentence } from "./sentence.js";
 import { getRandomEnVoices } from "./speechSynth.js";
 
-export function templateToSentences(template, prevLetterTemplate, greeting) {
+export function templateToSentences(template, prevLetterTemplate, isNumber, greeting) {
     const question = instantiateTemplate(template.questionTemplate, template.templateKeyVal, prevLetterTemplate.templateKeyVal);
     const answer = instantiateTemplate(template.answerTemplate, template.templateKeyVal, prevLetterTemplate.templateKeyVal);
     const [voice1, voice2] = getRandomEnVoices(2);
@@ -11,6 +11,21 @@ export function templateToSentences(template, prevLetterTemplate, greeting) {
     }
     sentences.push(new Sentence({content: question, voice: voice1, speechRate: 0.9}));
     sentences.push(new Sentence({content: answer, voice: voice2, speechRate: 0.9}));
+    if (isNumber) {
+        const possInt = parseInt(template.templateKeyVal.get('Key'));
+        const numImages = possInt === 0 ? 10 : possInt;
+        if (numImages > 1) {
+            for (let idx = 1; idx <= numImages; idx++ ) {
+                sentences.push(new Sentence({
+                    content: `${idx}`,
+                    voice: voice2,
+                    speechRate: 0.6,
+                    action: _ => {
+                        document.getElementById(`image-${idx}`).style.opacity = 1;
+                    }}));
+            }
+        } 
+    }
     return sentences;
 }
 

@@ -9,13 +9,17 @@ html, body, #displayer-svg {
   position: fixed;
 }
 
-#displayer-svg * {
-  animation: fadeIn 3s;
+#displayer-svg :not(.opaque) {
+  animation: fadeIn 1s;
+}
+
+.opaque {
+  opacity: 0.5;
 }
 
 @keyframes fadeIn {
   from {
-    opacity: 0.2;
+    opacity: 0;
   }
   to {
     opacity: 1;
