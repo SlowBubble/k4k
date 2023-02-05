@@ -4,10 +4,10 @@
 
 - Support multiple words for the same key
 - Chinese: use a Google Workspace web app
+- French/Spanish: use LibreTranslate.
 
 ## Doing
 
-- French/Spanish/Jap: use LibreTranslate.
 - Level 3
 
 

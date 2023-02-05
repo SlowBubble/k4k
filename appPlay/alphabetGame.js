@@ -59,7 +59,7 @@ export class AlphabetGame {
         this.numRemainingTriesPub(this.maxNumRounds - this.numRounds);
 
         if (this.numRounds > this.maxNumRounds) {
-            if (this.numRounds + 1 === this.maxNumRounds) {
+            if (this.numRounds === this.maxNumRounds + 1) {
                 renderTextInSvg(this.displayerSvg, 'Game Over'.toUpperCase(), 150);
 
             }

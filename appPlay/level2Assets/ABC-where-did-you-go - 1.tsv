@@ -25,13 +25,13 @@ Where did you go today?	I went to $Article $Word	w	whole foods		at
 Where did you go for vacation?	I went to $Article $Word	x	xin jiang		in	
 Where did you go today?	I went to $Article $Word	y	yard sale	the	at	
 Where did you go last week?	I went to $PAUSE $Article $Word	z	zoo	the	at	
-How many people did you see $PrevPreposition $PrevArticle $PrevWord?	$Word	0	100			10people
-How many people did you see $PrevPreposition $PrevArticle $PrevWord?	$Word	1	10			10people
-How many people did you see $PrevPreposition $PrevArticle $PrevWord?	$Word	2	20			10people
-How many people did you see $PrevPreposition $PrevArticle $PrevWord?	$Word	3	30			10people
-How many people did you see $PrevPreposition $PrevArticle $PrevWord?	$Word	4	40			10people
-How many people did you see $PrevPreposition $PrevArticle $PrevWord?	$Word	5	50			10people
-How many people did you see $PrevPreposition $PrevArticle $PrevWord?	$Word	6	60			10people
-How many people did you see $PrevPreposition $PrevArticle $PrevWord?	$Word	7	70			10people
-How many people did you see $PrevPreposition $PrevArticle $PrevWord?	$Word	8	80			10people
-How many people did you see $PrevPreposition $PrevArticle $PrevWord?	$Word	9	90			10people
+How many people did you see $PrevPreposition $PrevArticle $PrevWord?	I saw $PAUSE $Word people.	0	100			10people
+How many people did you see $PrevPreposition $PrevArticle $PrevWord?	I saw $PAUSE $Word people.	1	10			10people
+How many people did you see $PrevPreposition $PrevArticle $PrevWord?	I saw $PAUSE $Word people.	2	20			10people
+How many people did you see $PrevPreposition $PrevArticle $PrevWord?	I saw $PAUSE $Word people.	3	30			10people
+How many people did you see $PrevPreposition $PrevArticle $PrevWord?	I saw $PAUSE $Word people.	4	40			10people
+How many people did you see $PrevPreposition $PrevArticle $PrevWord?	I saw $PAUSE $Word people.	5	50			10people
+How many people did you see $PrevPreposition $PrevArticle $PrevWord?	I saw $PAUSE $Word people.	6	60			10people
+How many people did you see $PrevPreposition $PrevArticle $PrevWord?	I saw $PAUSE $Word people.	7	70			10people
+How many people did you see $PrevPreposition $PrevArticle $PrevWord?	I saw $PAUSE $Word people.	8	80			10people
+How many people did you see $PrevPreposition $PrevArticle $PrevWord?	I saw $PAUSE $Word people.	9	90			10people

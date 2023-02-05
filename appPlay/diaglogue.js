@@ -12,14 +12,21 @@ export function templateToSentences(template, prevLetterTemplate, isNumber, gree
     sentences.push(new Sentence({content: question, voice: voice1, speechRate: 0.9}));
     sentences.push(new Sentence({content: answer, voice: voice2, speechRate: 0.9}));
     if (isNumber) {
-        const possInt = parseInt(template.templateKeyVal.get('Key'));
-        const numImages = possInt === 0 ? 10 : possInt;
+        const possNumImg = parseInt(template.templateKeyVal.get('Key'));
+        const numImages = possNumImg === 0 ? 10 : possNumImg;
         if (numImages > 1) {
+            const possNum = parseInt(template.templateKeyVal.get('Word'));
+            const possMultiple = possNum / numImages;
+            let multiple = 1;
+            if (possMultiple > 0 && possMultiple === Math.floor(possMultiple)) {
+                multiple = possMultiple;
+            }
+
             for (let idx = 1; idx <= numImages; idx++ ) {
                 sentences.push(new Sentence({
-                    content: `${idx}`,
+                    content: `${idx * multiple}`,
                     voice: voice2,
-                    speechRate: 0.6,
+                    speechRate: 0.7,
                     action: _ => {
                         document.getElementById(`image-${idx}`).style.opacity = 1;
                     }}));
