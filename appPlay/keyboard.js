@@ -21,7 +21,7 @@ export class Keyboard {
         
             isLocked = true;
             try {
-                await game.respond(event.key);
+                await game.respond(event.key.toLowerCase());
             } finally {
                 isLocked = false;
             }
