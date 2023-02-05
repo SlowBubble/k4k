@@ -2,7 +2,6 @@
 
 ## TODO
 
-- Support multiple words for the same key
 - Chinese: use a Google Workspace web app
 - French/Spanish: use LibreTranslate.
 
@@ -17,3 +16,4 @@
 - Display number of items.
 - Menu
 - Caption
+- Support multiple words for the same key

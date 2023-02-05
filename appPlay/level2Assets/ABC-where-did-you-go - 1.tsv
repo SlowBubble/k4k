@@ -6,7 +6,8 @@ Where did you go today?	I went to $PAUSE $Article $Word	d	doctor	the	at
 Where did you go today?	I went to $PAUSE $Article $Word	e	eye doctor	the	at	
 Where did you go last week?	I went to $Article $Word	f	fenway park		at	
 Where did you go today?	I went to $PAUSE $Article $Word	g	grocery store	the	at	
-Where did you go today?	I went to $Article $Word	h	harvard yard		at	
+Where did you go today?	I went to $Article $Word	h	harbor	the	at	
+Where did you go last week?	I went to $Article $Word	h	harvard yard		at	
 Where did you go for vacation?	I went to $Article $Word	i	iceland		in	
 Where did you go for vacation?	I went to $Article $Word	j	japan		in	
 Where did you go last week?	I went to $PAUSE $Article $Word	k	kendall square		at	

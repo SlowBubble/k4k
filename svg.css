@@ -9,12 +9,16 @@ html, body, #displayer-svg {
   position: fixed;
 }
 
-#displayer-svg :not(.opaque) {
+#displayer-svg :not(.half-opaque) :not(.almost-opaque) {
   animation: fadeIn 1s;
 }
 
-.opaque {
+.half-opaque {
   opacity: 0.5;
+}
+
+.almost-opaque {
+  opacity: 0.1;
 }
 
 @keyframes fadeIn {

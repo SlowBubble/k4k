@@ -33,7 +33,7 @@ export async function templateToSvgElts(dirPath, isNumber, currTemplate, prevLet
         const imageElt = genImageElt(href);
         imageElt.setAttributeNS(null, "id", `image-${idx + 1}`);
         if (numImages > 1) {
-            imageElt.setAttributeNS(null, "class", `opaque`);
+            imageElt.setAttributeNS(null, "class", `half-opaque`);
         }
         imageElt.setAttributeNS(null, "x", currColIdx * dims.width);
         imageElt.setAttributeNS(null, "y", currRowIdx * dims.height);
@@ -49,6 +49,8 @@ export async function templateToSvgElts(dirPath, isNumber, currTemplate, prevLet
     }
 
     const text = document.createElementNS(svgns, "text");
+    text.setAttributeNS(null, "id", `word`);
+    text.setAttributeNS(null, "class", `almost-opaque`);
     text.setAttribute("x", 10);
     text.setAttribute("y", Math.ceil(numImages / numImagesPerRow) * dims.height + 10);
     text.setAttribute("font-size", 100);
@@ -69,10 +71,10 @@ function getReasonableDims(bbox, maxWidth, maxHeight, numImages) {
     let width = 400;
     let height = 400;
     if (imageWidthToHeightRatio > maxWidthPerImage / maxHeightPerImage) {
-        width = Math.min(maxWidthPerImage, 600);
+        width = Math.min(maxWidthPerImage, 700);
         height = width / imageWidthToHeightRatio;
     } else {
-        height = Math.min(maxHeightPerImage, 600);
+        height = Math.min(maxHeightPerImage, 700 * maxHeightPerImage / maxWidthPerImage);
         width = height * imageWidthToHeightRatio;
     }
     return {height: height, width: width};

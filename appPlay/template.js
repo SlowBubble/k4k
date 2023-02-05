@@ -3,15 +3,21 @@ export const levelToAssetUrl = {
     1: 'appPlay/assets/ABC-tasty-food - 1.tsv',
     2: 'appPlay/level2Assets/ABC-where-did-you-go - 1.tsv',
 }
-export async function getKeyToTemplate(templateFilePath) {
+export async function getKeyToTemplates(templateFilePath) {
     const response = await fetch(templateFilePath);
     const tsv = await response.text();
     const gridData = tsv.split(/\r?\n/g).map(line => line.split('\t'));
     const keyValForRows = parseAsKeyValForRows(gridData);
-    return new Map(keyValForRows.map(keyValMap => {
+    const res = new Map();
+    keyValForRows.forEach(keyValMap => {
         const template = keyValToDiaglogueTemplate(keyValMap);
-        return [template.key, template];
-    }));
+        if (!res.has(template.key)) {
+            res.set(template.key, []);
+        }
+        const array = res.get(template.key);
+        return array.push(template);
+    });
+    return res;
 }
 
 export class DialogueTemplate {

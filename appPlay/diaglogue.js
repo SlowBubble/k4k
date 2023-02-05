@@ -10,7 +10,12 @@ export function templateToSentences(template, prevLetterTemplate, isNumber, gree
         sentences.push(new Sentence({content: greeting, voice: voice1, speechRate: 0.8}));
     }
     sentences.push(new Sentence({content: question, voice: voice1, speechRate: 0.9}));
-    sentences.push(new Sentence({content: answer, voice: voice2, speechRate: 0.9}));
+    sentences.push(new Sentence({
+        content: answer, voice: voice2, speechRate: 0.9,
+        action: _ => {
+            document.getElementById(`word`).style.opacity = 1;
+        }
+    }));
     if (isNumber) {
         const possNumImg = parseInt(template.templateKeyVal.get('Key'));
         const numImages = possNumImg === 0 ? 10 : possNumImg;

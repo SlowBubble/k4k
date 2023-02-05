@@ -1,5 +1,5 @@
 import { generateDefaultSentences, templateToSentences } from "./diaglogue.js";
-import { getKeyToTemplate } from "./template.js";
+import { getKeyToTemplates } from "./template.js";
 import { Sentence } from "./sentence.js";
 import { speakSentence } from "./speechSynth.js";
 import { templateToSvgElts } from "./display.js";
@@ -23,7 +23,7 @@ export class AlphabetGame {
         this.numWrongKeys = 0;
         this.numRounds = 0;
         this.maxNumRounds = maxNumRounds;
-        this.keyToTemplate = new Map();
+        this.keyToTemplates = new Map();
         this.prevLetterTemplate = null;
         this.playerName = playerName;
         this.assetsDirPath = '';
@@ -83,12 +83,13 @@ export class AlphabetGame {
         }
         let sentences;
         let svgElts;
-        if (this.keyToTemplate.has(key)) {
-            const currTemplate = this.keyToTemplate.get(key);
+        if (this.keyToTemplates.has(key)) {
+            const possTemplates = this.keyToTemplates.get(key);
+            const currTemplate = possTemplates[getRandomInt(possTemplates.length)];
             sentences = templateToSentences(
                 currTemplate, this.prevLetterTemplate, isNumber, this.getGreeting());
             if (isLetter) {
-                this.prevLetterTemplate = this.keyToTemplate.get(key);
+                this.prevLetterTemplate = currTemplate;
             }
             svgElts = await templateToSvgElts(
                 this.assetsDirPath, isNumber, currTemplate, this.prevLetterTemplate);
@@ -117,8 +118,8 @@ export class AlphabetGame {
             return;
         }
         this.assetsDirPath = assetsDirPath;
-        this.keyToTemplate = await getKeyToTemplate(`${assetsDirPath}/${templateFileName}`);
-        this.prevLetterTemplate = this.keyToTemplate.get('a');
+        this.keyToTemplates = await getKeyToTemplates(`${assetsDirPath}/${templateFileName}`);
+        this.prevLetterTemplate = this.keyToTemplates.get('a')[0];
     }
 
     loadPlayerName(name) {
