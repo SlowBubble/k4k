@@ -111,7 +111,7 @@ export class AlphabetGame {
 
     async loadLevel(level) {
         this.level = level;
-        renderTextInSvg(this.displayerSvg, 'Press a letter on your keyboard.', 80);
+        renderTextInSvg(this.displayerSvg, 'Press a letter on your keyboard.', 60);
         const assetsDirPath = levelToAssetsDirPath[level];
         const templateFileName = levelToTemplateFileName[level];
         if (!assetsDirPath || !templateFileName) {

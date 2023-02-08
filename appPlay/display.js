@@ -71,11 +71,13 @@ function getReasonableDims(bbox, maxWidth, maxHeight, numImages) {
     let width = 400;
     let height = 400;
     if (imageWidthToHeightRatio > maxWidthPerImage / maxHeightPerImage) {
-        width = Math.min(maxWidthPerImage, 700);
+        width = Math.min(maxWidthPerImage, 1000);
         height = width / imageWidthToHeightRatio;
+        console.log(maxWidthPerImage, width);
     } else {
-        height = Math.min(maxHeightPerImage, 700 * maxHeightPerImage / maxWidthPerImage);
+        height = Math.min(maxHeightPerImage, 1000 * maxHeightPerImage / maxWidthPerImage);
         width = height * imageWidthToHeightRatio;
+        console.log(maxHeightPerImage, height);
     }
     return {height: height, width: width};
 }
