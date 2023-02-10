@@ -1,0 +1,37 @@
+Question	Answer	Key	Word
+What do you have in your room?	I have got $PAUSE some $Word	a	abacuses
+What do you have in your house?	I have got $PAUSE some $Word	b	bookshelfs
+What do you have in your shelf?	I have got $PAUSE some $Word	c	crayons
+What do you have in your room?	I have got $PAUSE some $Word	d	dressers
+What do you have in your house?	I have got $PAUSE some $Word	e	extension cords
+What do you have in your house?	I have got $PAUSE some $Word	f	fridges
+What do you have in your dresser?	I have got $PAUSE some $Word	g	gloves
+What do you have in your room?	I have got $PAUSE some $Word	h	hangers
+What do you have in your shelf?	I have got $PAUSE some $Word	i	iphones
+What do you have in your bookshelf?	I have got $PAUSE some $Word	j	jars
+What do you have in your bookshelf?	I have got $PAUSE some $Word	k	keys
+What do you have in your room?	I have got $PAUSE some $Word	l	lamps
+What do you have in your room?	I have got $PAUSE some $Word	m	mirrors
+What do you have in your shelf?	I have got $PAUSE some $Word	n	notebooks
+What do you have in your room?	I have got $PAUSE some $Word	o	office chairs
+What do you have in your closet?	I have got $PAUSE some $Word	p	pants
+What do you have in your shelf?	I have got $PAUSE some $Word	q	q-tips
+What do you have in your closet?	I have got $PAUSE some $Word	r	rackets
+What do you have in your dresser?	I have got $PAUSE some $Word	s	socks
+What do you have in your house?	I have got $PAUSE some $Word	t	tables
+What do you have in your room?	I have got $PAUSE some $Word	u	umbrellas
+What do you have in your closet?	I have got $PAUSE some $Word	v	vacuum cleaners
+What do you have in your house?	I have got $PAUSE some $Word	w	windows
+What do you have in your room?	I have got $PAUSE some $Word	x	xylophones
+What do you have in your closet?	I have got $PAUSE some $Word	y	yoga mats
+What do you have in your closet?	I have got $PAUSE some $Word	z	zip-up jackets
+How many $PrevWord do you have?	I have got $PAUSE $Word $PrevWord	0	10
+How many $PrevWord do you have?	I only have 1.	1	1
+How many $PrevWord do you have?	I have got $PAUSE $Word $PrevWord	2	2
+How many $PrevWord do you have?	I have got $PAUSE $Word $PrevWord	3	3
+How many $PrevWord do you have?	I have got $PAUSE $Word $PrevWord	4	4
+How many $PrevWord do you have?	I have got $PAUSE $Word $PrevWord	5	5
+How many $PrevWord do you have?	I have got $PAUSE $Word $PrevWord	6	6
+How many $PrevWord do you have?	I have got $PAUSE $Word $PrevWord	7	7
+How many $PrevWord do you have?	I have got $PAUSE $Word $PrevWord	8	8
+How many $PrevWord do you have?	I have got $PAUSE $Word $PrevWord	9	9

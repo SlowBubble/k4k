@@ -7,11 +7,11 @@
 
 ## Doing
 
-- Level 3
 
 
 ## Done
 
+- Level 3
 - Counting
 - Display number of items.
 - Menu

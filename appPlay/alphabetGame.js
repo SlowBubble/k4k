@@ -8,10 +8,12 @@ import { templateToSvgElts } from "./display.js";
 const levelToAssetsDirPath = {
     1: 'appPlay/level1Assets',
     2: 'appPlay/level2Assets',
+    3: 'appPlay/level3Assets',
 }
 const levelToTemplateFileName = {
     1: 'ABC-tasty-food - 1.tsv',
-    2: 'ABC-where-did-you-go - 1.tsv',
+    2: 'ABC-What-do-you-have - 1.tsv',
+    3: 'ABC-where-did-you-go - 1.tsv',
 }
 
 export const maxLevel = Math.max(...Object.keys(levelToTemplateFileName).map(str => parseInt(str)));

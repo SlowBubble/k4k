@@ -2,6 +2,7 @@
 export const levelToAssetUrl = {
     1: 'appPlay/assets/ABC-tasty-food - 1.tsv',
     2: 'appPlay/level2Assets/ABC-where-did-you-go - 1.tsv',
+    3: 'appPlay/level3Assets/ABC-What-do-you-have - 1.tsv',
 }
 export async function getKeyToTemplates(templateFilePath) {
     const response = await fetch(templateFilePath);
