@@ -107,7 +107,7 @@ export class AlphabetGame {
             renderTextInSvg(this.displayerSvg, key.toUpperCase());
         }
         if (this.numRounds == this.maxNumRounds) {
-            this.displayerSvg.style.background = 'grey';
+            this.displayerSvg.style.background = '#DCDCDC';
         }
     }
 
